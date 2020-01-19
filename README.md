@@ -109,7 +109,7 @@ kawasaki-react
 │   │   │   └── LoginPage.js
 │   │   └── templates
 │   │       ├── MainContents.js
-│   │       └── MainContentsNoHeader.js
+│   │       └── LoginContent.js
 │   ├── config
 │   │   ├── actionType.js
 │   │   ├── store.js
