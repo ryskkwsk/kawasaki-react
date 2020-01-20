@@ -1,6 +1,7 @@
 ##  [フロントエンド課題「Reactを使ったSPAの作成」]
 
 ### 使用した技術
+```
 ＊ Node.js 10.15.3
 * npm 6.4.1
 ＊ React 16.12.0
@@ -14,6 +15,7 @@
 * react-router-dom 5.1.2
 * connected-react-router 6.6.1
 * history 4.10.1
+```
 
 ### 環境構築
 #### ・nodebrewのインストール
