@@ -45,10 +45,10 @@ $ npm install -g yarn
 #### ・アプリケーションの起動
 ```
 # 任意の階層でアプリケーションをBitbucketからクローンする
-$git clone git@bitbucket.org:kawasakiryosuke/kawasaki-react.git
+$git clone git@bitbucket.org:teamlabengineering/kawasaki-react-spa.git
 
 # ディレクトリを移動
-$ cd kawasaki-react
+$ cd kawasaki-react-spa
 
 # アプリケーションをスタート
 $ yarn start
