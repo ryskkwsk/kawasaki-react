@@ -45,7 +45,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path={"/"} component={ItemListPage} />
             <Route exact path={"/items"} component={ItemListPage} />
-            <Route exact path={"/items/search"} component={ItemListPage} />
+            <Route exact component={ItemListPage} />
           </Switch>
         </Auth>
       </Switch>

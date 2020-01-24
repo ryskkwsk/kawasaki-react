@@ -159,7 +159,6 @@ const validateItem = item => {
  */
 const validateSearchKeyWord = keyword => {
   let result = {};
-
   if (keyword === "") {
     result.title = "検索ワードを入力してください";
   }
@@ -211,7 +210,6 @@ export const searchItems = (token, keyword) => dispatch => {
             });
           }
         }
-        dispatch(push(`/items/search`));
       })
       .catch(error => {
         const actions = handleItemActionError(error);
@@ -221,43 +219,11 @@ export const searchItems = (token, keyword) => dispatch => {
       });
   }
   else {
-    try {
-      axios
-        .get(`${API_BASE_PATH}/items`, {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        })
-        .then(responseSearchResult => {
-          dispatch({
-            type: actionType.FETCH_ITEM_FULFILLED,
-            payload: responseSearchResult.data
-          });
-          for (const item of responseSearchResult.data) {
-            if (item.imagePath !== null && item.imagePath !== undefined) {
-              searchImage(token, item.id).then(response => {
-                response.blob().then(image => {
-                  const imageUrl = URL.createObjectURL(image);
-                  dispatch({
-                    type: actionType.ADD_ITEM_IMAGE,
-                    payload: {
-                      imageUrl: imageUrl,
-                      id: item.id
-                    }
-                  });
-                });
-              });
-            }
-          }
-          dispatch(push(`/items/search`));
-        });
-    } catch (error) {
-      const actions = handleItemActionError(error);
-      for (const action of actions) {
-        dispatch(action);
-      }
-    }
+    // 検索ワードが空だったら空の配列を返す
+    dispatch({
+      type: actionType.FETCH_ITEM_FULFILLED,
+      payload: []
+    });
   }
 };
 
