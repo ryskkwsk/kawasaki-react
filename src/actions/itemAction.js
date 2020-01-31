@@ -8,7 +8,7 @@ const INITIAL_ITEM_FORM = {
   id: null,
   title: "",
   description: "",
-  price: "0",
+  price: "",
   image: null
 };
 
@@ -34,15 +34,15 @@ const searchImage = (token, id) => {
  * @return 検索結果を返す
  */
 const searchResult = (token, keyword) => {
-  return axios.get(`${API_BASE_PATH}/items/search/${keyword}`, {
+  const params = new URLSearchParams();
+  params.set('title', keyword);
+  return fetch(`${API_BASE_PATH}/items/search/?` + params, {
+    method: 'GET',
     headers: {
       "Content-type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    params: {
-      q: keyword
+      Authorization: `Bearer ${token}`,
     }
-  });
+  })
 };
 
 /**
@@ -139,15 +139,15 @@ const validateItem = item => {
   if (item.description === "") {
     result.description = "商品説明を入力してください。";
   } else if (item.description.length > 500) {
-    result.description = "商品名は500文字以内で入力してください。";
+    result.description = "商品説明は500文字以内で入力してください。";
   }
 
   if (item.price === "") {
     result.price = "商品価格を入力してください。";
   } else if (!item.price.match(/^\d{1,3}(,\d{3})*$/)) {
-    result.price = "商品は半角数字で入力してください。";
+    result.price = "商品価格は半角数字で入力してください。";
   } else if (item.price.length > 9) {
-    result.price = "商品金額の上限は9,999,999です";
+    result.price = "商品価格の上限は9,999,999です";
   }
 
   return result;
@@ -184,17 +184,17 @@ export const searchItems = (token, keyword) => dispatch => {
   dispatch(push(`/items/search/${encodeURI(keyword)}`));
   if (keyword !== null && keyword !== "") {
     // API通信を行う
-    searchResult(token, keyword)
-      .then(response => {
+    searchResult(token, keyword).then(response => {
+        response.json().then(data => {
         dispatch({
           type: actionType.FETCH_ITEM_FULFILLED,
-          payload: response.data
+          payload: data
         });
         dispatch({
           type: actionType.ADD_TOAST_MESSAGE,
-          payload: `${response.data.length}件の商品が見つかりました`
+          payload: `${data.length}件の商品が見つかりました`
         });
-        for (const item of response.data) {
+        for (const item of data) {
           if (item.imagePath !== null && item.imagePath !== undefined) {
             searchImage(token, item.id).then(response => {
               response.blob().then(image => {
@@ -210,6 +210,7 @@ export const searchItems = (token, keyword) => dispatch => {
             });
           }
         }
+        })
       })
       .catch(error => {
         const actions = handleItemActionError(error);
@@ -313,9 +314,15 @@ export const showUpdateForm = (item, title) => dispatch => {
  * itemFormの値を初期化して非表示にする
  */
 export const hideItemForm = () => dispatch => {
+
+  for(const key in INITIAL_ITEM_FORM){
+    if(INITIAL_ITEM_FORM.hasOwnProperty(key)){
+      INITIAL_ITEM_FORM[key] = "";
+    }
+  }
   dispatch({
     type: actionType.SET_ITEM_FORM,
-    payload: actionType.INITIAL_ITEM_FORM
+    payload: INITIAL_ITEM_FORM
   });
   dispatch({
     type: actionType.SET_ITEM_FORM_ERRORS,
@@ -338,9 +345,13 @@ export const submitItemForm = (token, item) => async dispatch => {
     });
     return;
   }
-
   // フォームを初期化して閉じる処理
   const closeSubmitForm = () => {
+    for(const key in INITIAL_ITEM_FORM){
+      if(INITIAL_ITEM_FORM.hasOwnProperty(key)){
+        INITIAL_ITEM_FORM[key] = "";
+      }
+    }
     dispatch({
       type: actionType.SET_ITEM_FORM,
       payload: INITIAL_ITEM_FORM
@@ -361,7 +372,7 @@ export const submitItemForm = (token, item) => async dispatch => {
 
   dispatch({ type: actionType.SUBMIT_ITEM });
   // IDが存在する場合は更新処理
-  if (item.id !== null) {
+  if (item.id !== null && item.id !== undefined) {
     try {
       // API通信を行う(PUT /items/:id)
       await axios
