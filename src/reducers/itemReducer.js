@@ -6,7 +6,7 @@ const initialItemState = {
     id: null,
     title: '',
     description: '',
-    price: '0',
+    price: '',
     image: null,
     image_file: null,
   },
