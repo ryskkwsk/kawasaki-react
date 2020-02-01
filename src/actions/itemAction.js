@@ -363,7 +363,6 @@ export const submitItemForm = (token, item) => async dispatch => {
     "Content-type": "application/json",
     Authorization: `Bearer ${token}`
   };
-
   // 金額のカンマを外す
   const formItem = {
     ...item,
@@ -372,7 +371,7 @@ export const submitItemForm = (token, item) => async dispatch => {
 
   dispatch({ type: actionType.SUBMIT_ITEM });
   // IDが存在する場合は更新処理
-  if (item.id !== null && item.id !== undefined) {
+  if (item.id !== null && item.id !== undefined && item.id !== "") {
     try {
       // API通信を行う(PUT /items/:id)
       await axios
