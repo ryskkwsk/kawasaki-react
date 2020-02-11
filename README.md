@@ -77,7 +77,6 @@ kawasaki-react
 ├── src
 │   ├── App.css
 │   ├── App.js
-│   ├── App.test.js
 │   ├── Auth.js
 │   ├── Token.js
 │   ├── actions
