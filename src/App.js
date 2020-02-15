@@ -43,9 +43,7 @@ class App extends React.Component {
         {/* 認証が必要なルーティング */}
         <Auth isLogin={this.props.auth.isLogin}>
           <Switch>
-            <Route exact path={"/"} component={ItemListPage} />
-            <Route exact path={"/items"} component={ItemListPage} />
-            <Route exact component={ItemListPage} />
+            <Route path={"/"} component={ItemListPage} />
           </Switch>
         </Auth>
       </Switch>
