@@ -30,16 +30,30 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH　>> ~/.bash_profile
 $ nodebrew ls-remote
 
 #最新のLTS版インストール
-$ nodebrew install-binary {version}
+$ nodebrew install-binary stable
 
 # 使用バージョンを指定
 $ nodebrew use {version}
+```
+
+#### ・node_modulesのインストール
+```
+# npmのローカルインストール
+$ npm install bower
 ```
 
 #### ・yarnのインストール
 ```
 # npm 経由でyarnをインストール
 $ npm install -g yarn
+```
+
+#### ・サーバー側のアプリケーションを起動する
+```
+# DB(MySql)を起動する
+$ mysql.server start
+
+# GitHubでのOAuth認証でログインを行う必要があるため、サーバー側のアプリケーションを起動してください。
 ```
 
 #### ・アプリケーションの起動
@@ -54,80 +68,34 @@ $ cd kawasaki-react-spa
 $ yarn start
 ```
 
-#### ・サーバー側のアプリケーションを起動する
-```
-# MySqlを起動する
-$ mysql.server start
-
-# GitHubでのOAuth認証でログインを行う必要があるため、サーバー側のアプリケーションを起動してください。
-```
-
 ### ディレクトリ構成
 ```
 kawasaki-react
 ├── documents //コンポーネント図、データフロー図等
 ├── package.json
 ├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   ├── logo192.png
-│   ├── logo512.png
-│   ├── manifest.json
-│   └── robots.txt
 ├── src
 │   ├── App.css
-│   ├── App.js
-│   ├── Auth.js
-│   ├── Token.js
-│   ├── actions
-│   │   ├── authAction.js
-│   │   ├── itemAction.js
-│   │   └── messageAction.js
+│   ├── App.js    // 認証とルーティングを行う
+│   ├── Auth.js   // 認証処理
+│   ├── Token.js  // トークン取得処理
+│   ├── actions   // ReduxのAction
 │   ├── components
 │   │   ├── atoms
-│   │   │   ├── Button.js
-│   │   │   ├── IconButton.js
-│   │   │   ├── Image.js
-│   │   │   ├── InputFile.js
-│   │   │   └── TextField.js
 │   │   ├── molecules
-│   │   │   ├── Card
-│   │   │   │   └── ItemCard.js
-│   │   │   ├── Dialog
-│   │   │   │   └── DeleteDialog.js
-│   │   │   ├── Form
-│   │   │   │   ├── ItemForm.js
-│   │   │   │   └── SearchForm.js
-│   │   │   └── ToastMessage.js
 │   │   ├── organisms
-│   │   │   ├── Header.js
-│   │   │   └── Item
-│   │   │       ├── ItemCardList.js
-│   │   │       ├── ItemFormDialog.js
-│   │   │       └── ItemListHeader.js
 │   │   ├── pages
-│   │   │   ├── ItemListPage.js
-│   │   │   └── LoginPage.js
+│   │   │   ├── ItemListPage.js  // ログインページのコンテナ
+│   │   │   └── LoginPage.js     // 商品ページのコンテナ
 │   │   └── templates
-│   │       ├── MainContents.js
-│   │       └── LoginContent.js
-│   ├── config
-│   │   ├── actionType.js
-│   │   ├── store.js
-│   │   └── theme.js
-│   ├── images
-│   │   ├── loading.svg
-│   │   ├── login.jpg
-│   │   └── none.png
+│   ├── config // 設定ファイル
+│   ├── images // 画像を格納する
 │   ├── index.css
 │   ├── index.js
-│   ├── reducers
-│   │   ├── authReducer.js
-│   │   ├── index.js
-│   │   ├── itemReducer.js
-│   │   └── messageReducer.js
+│   ├── reducers // ReduxのReducer
+│   │   └── index.js // Reducerを1つにまとめる
 │   ├── serviceWorker.js
-│   └── styles
+│   └── styles // 各コンテナのスタイル
 │       ├── itemListPage.js
 │       └── loginPage.js
 └── yarn.lock
