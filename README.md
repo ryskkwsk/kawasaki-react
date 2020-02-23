@@ -2,19 +2,19 @@
 
 ### 使用した技術
 ```
-＊ Node.js 10.15.3
-* npm 6.4.1
-＊ React 16.12.0
-* Redux 4.0.5
-* React-dom 16.12.0
-* react-redux 7.1.3
-* redux-promise-middleware 6.1.2
-* react-router 5.1.2
-* redux-logger 3.0.6
-* redux-devtools-extension 2.13.8
-* react-router-dom 5.1.2
-* connected-react-router 6.6.1
-* history 4.10.1
+＊ Node.js 12.1(LTS)
+* npm 6.4
+＊ React 16.1
+* Redux 4.0
+* React-dom 16.1
+* react-redux 7.1
+* redux-promise-middleware 6.1
+* react-router 5.1
+* redux-logger 3.0
+* redux-devtools-extension 2.1
+* react-router-dom 5.1
+* connected-react-router 6.6
+* history 4.1
 ```
 
 ### 環境構築
