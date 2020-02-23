@@ -23,13 +23,13 @@
 # nodebrewのインストール
 # $ brew install nodebrew
 
-# 環境パスを通す
+# パスを通す
 export PATH=$HOME/.nodebrew/current/bin:$PATH　>> ~/.bash_profile
 
 # 使用可能なバージョンを表示
 $ nodebrew ls-remote
 
-# インストール
+#最新のLTS版インストール
 $ nodebrew install-binary {version}
 
 # 使用バージョンを指定
@@ -44,7 +44,7 @@ $ npm install -g yarn
 
 #### ・アプリケーションの起動
 ```
-# 任意の階層でアプリケーションをBitbucketからクローンする
+# アプリケーションをBitbucketからクローンする
 $git clone git@bitbucket.org:teamlabengineering/kawasaki-react-spa.git
 
 # ディレクトリを移動
