@@ -1,23 +1,26 @@
 import actionType from "../config/actionType";
+import { Cookies } from 'react-cookie';
 
 const TOKEN_KEY = "accessToken";
-
+const cookies = new Cookies();
 const initialAuthState = {
-  accessToken: localStorage.getItem(TOKEN_KEY),
-  isLogin: localStorage.getItem(TOKEN_KEY) !== null
+  accessToken: cookies.get(TOKEN_KEY),
+  isLogin: cookies.get(TOKEN_KEY) !== null
 };
 
 const reducer = (state = initialAuthState, action) => {
   switch (action.type) {
     case actionType.LOGIN:
-      localStorage.setItem(TOKEN_KEY, action.payload);
+      cookies.set(TOKEN_KEY, action.payload, {
+        maxAge: 3600, // ログイン後1時間でクッキーが切れます
+      });
       return {
         ...state,
         accessToken: action.payload,
         isLogin: true
       };
     case actionType.LOGOUT:
-      localStorage.removeItem(TOKEN_KEY);
+      cookies.remove(TOKEN_KEY);
       return {
         ...state,
         accessToken: null,

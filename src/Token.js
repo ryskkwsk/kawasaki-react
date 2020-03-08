@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 /**
- * サーバー側で発行されるAPIアクセストークンをローカルストレージに保存する
+ * サーバー側で発行されるAPIアクセストークンをCookieに保存する
  */
 class Token extends Component {
   constructor(props) {
