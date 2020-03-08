@@ -11,15 +11,7 @@ import Token from "./Token";
 
 import LoginPage from "./components/pages/LoginPage.js";
 import ItemListPage from "./components/pages/ItemListPage.js";
-
-/**
- * Reduxのstateをpropsに展開する
- */
-function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  };
-}
+import NotFound from "./components/pages/error/NotFound.js";
 
 /**
  * Reduxのactionをpropsに展開する
@@ -31,7 +23,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 /**
- * 認証とルーティングを行う
+ * ルーティングを行い表示画面を切り替えるコンポーネント
  */
 class App extends React.Component {
   render = () => (
@@ -41,14 +33,15 @@ class App extends React.Component {
         <Route exact path={"/login"} component={LoginPage} />
         <Route path={"/token/:token"} component={Token} />
         {/* 認証が必要なルーティング */}
-        <Auth isLogin={this.props.auth.isLogin}>
+        <Auth>
           <Switch>
             <Route path={"/"} component={ItemListPage} />
           </Switch>
         </Auth>
+        <Route exact component={NotFound} />
       </Switch>
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapDispatchToProps)(App);
