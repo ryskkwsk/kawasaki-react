@@ -48,12 +48,12 @@ const saveItemForm = (formItem) => {
 
 /**
  * 画像をDBに登録する
- * @param {*} image_file 画像ファイル
+ * @param {*} imageFile 画像ファイル
  * @param {*} id 商品ID
  */
-const saveItemImage = (image_file, id) => {
+const saveItemImage = (imageFile, id) => {
   const params = new FormData();
-  params.append("image", image_file);
+  params.append("image", imageFile);
   return axios.post(`${API_BASE_PATH}/items/image/${id}`, params);
 };
 
@@ -252,10 +252,10 @@ export const setItemPrice = price => {
  * 商品画像をitemFormにセットする
  * @param image 商品画像
  */
-export const setItemImage = (image, image_file) => {
+export const setItemImage = (image, imageFile) => {
   return {
     type: actionType.SET_ITEM_IMAGE,
-    payload: { image, image_file }
+    payload: { image, imageFile }
   };
 };
 
@@ -356,8 +356,8 @@ export const submitItemForm = (token, item) => async dispatch => {
           });
         });
       // 画像が選択されていた場合、画像を更新
-      if (!item.image_file) {
-        await saveItemImage(item.image_file, item.id);
+      if (!item.imageFile) {
+        await saveItemImage(item.imageFile, item.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
           type: actionType.ADD_TOAST_MESSAGE,
@@ -407,8 +407,8 @@ export const submitItemForm = (token, item) => async dispatch => {
         payload: "商品フォームの登録に成功しました。"
       });
       // 画像が選択されていた場合、画像をDBに登録する
-      if (!item.image_file) {
-        await saveItemImage(token, item.image_file, responseItemForm.data.id);
+      if (!item.image_ile) {
+        await saveItemImage(token, item.imageFile, responseItemForm.data.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
           type: actionType.ADD_TOAST_MESSAGE,

@@ -8,7 +8,7 @@ const initialItemState = {
     description: '',
     price: '',
     image: null,
-    image_file: null,
+    imageFile: null,
   },
   itemFormErrors: {},
   formTitle: '',
@@ -73,7 +73,7 @@ const reducer = (state = initialItemState, action) => {
       return { ...state };
     case actionType.SET_ITEM_IMAGE:
       state.itemForm.image = action.payload.image;
-      state.itemForm.image_file = action.payload.image_file
+      state.itemForm.imageFile = action.payload.imageFile
       return { ...state };
     case actionType.SET_ITEM_IMAGE_URL:
       state.itemForm.image_url = action.payload;
