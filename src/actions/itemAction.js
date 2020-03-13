@@ -148,12 +148,12 @@ const validateSearchKeyWord = keyword => {
  * @param keyword 検索キーワード
  */
 export const searchItems = (token, keyword) => dispatch => {
-  const result = validateSearchKeyWord(keyword);
+  const validateResults = validateSearchKeyWord(keyword);
 
-  if (Object.keys(result).length) {
+  if (Object.keys(validateResults).length) {
     dispatch({
       type: actionType.ADD_TOAST_MESSAGE,
-      payload: result.title
+      payload: validateResults.title
     });
   }
   dispatch({ type: actionType.FETCH_ITEM });
