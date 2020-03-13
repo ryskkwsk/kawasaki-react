@@ -2,14 +2,14 @@ import actionType from "../config/actionType";
 
 const initialMessageState = {
   toastMessages: [],
-  error_flg: false
+  errorFlg: false
 };
 
 const reducer = (state = initialMessageState, action) => {
   switch (action.type) {
     case actionType.ADD_TOAST_MESSAGE:
       let toastMessages = state.toastMessages.concat(action.payload);
-      return { ...state, toastMessages, error_flg: false };
+      return { ...state, toastMessages, errorFlg: false };
     case actionType.REMOVE_TOAST_MESSAGE:
       state.toastMessages.splice(action.payload, 1);
       return { ...state };
@@ -17,17 +17,17 @@ const reducer = (state = initialMessageState, action) => {
       state.toastMessages = state.toastMessages.concat(
         "パラメーターが不正です。"
       );
-      return { ...state, error_flg: true };
+      return { ...state, errorFlg: true };
     case actionType.HANDLE_NOT_FOUND:
       state.toastMessages = state.toastMessages.concat(
         "対象のデータが見つかりませんでした。"
       );
-      return { ...state, error_flg: true };
+      return { ...state, errorFlg: true };
     case actionType.HANDLE_SERVER_ERROR:
       state.toastMessages = state.toastMessages.concat(
         "サーバーエラーが発生しました。"
       );
-      return { ...state, error_flg: true };
+      return { ...state, errorFlg: true };
     default:
       return state;
   }

@@ -151,7 +151,7 @@ class ItemListPage extends React.Component {
   renderToastMessage = style =>
     this.props.message.toastMessages.map((message, index) => (
       <div key={index}>
-        {this.props.message.error_flg ? (
+        {this.props.message.errorFlg ? (
           <ToastMessage
             style={style}
             className={this.props.classes.toastMessage}
