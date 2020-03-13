@@ -1,6 +1,6 @@
 import { push } from "connected-react-router";
-import * as axios from "axios";
 import actionType from "../config/actionType";
+import axios from '../config/Interceptors';
 
 const API_BASE_PATH = process.env.REACT_APP_API_ROUTE;
 
@@ -29,51 +29,32 @@ const searchImage = (token, id) => {
 
 /**
  * 商品のタイトルを検索する
- * @param {*} token アクセストークン
  * @param {*} keyword 検索ワード
  * @return 検索結果を返す
  */
-const searchResult = (token, keyword) => {
+const searchResult = (keyword) => {
   const params = new URLSearchParams();
   params.set('title', keyword);
-  return fetch(`${API_BASE_PATH}/items/search/?` + params, {
-    method: 'GET',
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`,
-    }
-  })
+  return axios.get(`${API_BASE_PATH}/items/search/?` + params)
 };
 
 /**
  * 商品フォームにセットされた情報をDBに登録する
- * @param {*} token アクセストークン
  * @param {*} formItem 商品フォームにセットされた情報
  */
-const saveItemForm = (token, formItem) => {
-  return axios.post(`${API_BASE_PATH}/items`, formItem, {
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`
-    }
-  });
+const saveItemForm = (formItem) => {
+  return axios.post(`${API_BASE_PATH}/items`, formItem);
 };
 
 /**
  * 画像をDBに登録する
- * @param {*} token アクセストークン
  * @param {*} image_file 画像ファイル
  * @param {*} id 商品ID
  */
-const saveItemImage = (token, image_file, id) => {
+const saveItemImage = (image_file, id) => {
   const params = new FormData();
   params.append("image", image_file);
-  return axios.post(`${API_BASE_PATH}/items/image/${id}`, params, {
-    headers: {
-      "Content-type": "multipart/form-data",
-      Authorization: `Bearer ${token}`
-    }
-  });
+  return axios.post(`${API_BASE_PATH}/items/image/${id}`, params);
 };
 
 /**
@@ -86,12 +67,7 @@ export const fetchItems = token => async dispatch => {
   dispatch(push(`/items/search`));
   try {
     await axios
-      .get(`${API_BASE_PATH}/items`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`
-        }
-      })
+      .get(`${API_BASE_PATH}/items`)
       .then(responseSearchResult => {
         dispatch({
           type: actionType.FETCH_ITEM_FULFILLED,
@@ -184,7 +160,7 @@ export const searchItems = (token, keyword) => dispatch => {
   dispatch(push(`/items/search/${encodeURI(keyword)}`));
   if (keyword !== null && keyword !== "") {
     // API通信を行う
-    searchResult(token, keyword).then(response => {
+    searchResult(keyword).then(response => {
         response.json().then(data => {
         dispatch({
           type: actionType.FETCH_ITEM_FULFILLED,
@@ -359,10 +335,6 @@ export const submitItemForm = (token, item) => async dispatch => {
     dispatch({ type: actionType.TOGGLE_ITEM_FORM });
   };
 
-  const headers = {
-    "Content-type": "application/json",
-    Authorization: `Bearer ${token}`
-  };
   // 金額のカンマを外す
   const formItem = {
     ...item,
@@ -375,9 +347,7 @@ export const submitItemForm = (token, item) => async dispatch => {
     try {
       // API通信を行う(PUT /items/:id)
       await axios
-        .put(`${API_BASE_PATH}/items/${item.id}`, formItem, {
-          headers: headers
-        })
+        .put(`${API_BASE_PATH}/items/${item.id}`, formItem)
         .then(() => {
           dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
           dispatch({
@@ -387,7 +357,7 @@ export const submitItemForm = (token, item) => async dispatch => {
         });
       // 画像が選択されていた場合、画像を更新
       if (item.image_file !== null && item.image_file !== undefined) {
-        await saveItemImage(token, item.image_file, item.id);
+        await saveItemImage(item.image_file, item.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
           type: actionType.ADD_TOAST_MESSAGE,
@@ -396,12 +366,7 @@ export const submitItemForm = (token, item) => async dispatch => {
       }
       // 一覧を再検索
       await axios
-        .get(`${API_BASE_PATH}/items/`, {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        })
+        .get(`${API_BASE_PATH}/items/`)
         .then(responseSearchResult => {
           dispatch({
             type: actionType.FETCH_ITEM_FULFILLED,
@@ -436,7 +401,7 @@ export const submitItemForm = (token, item) => async dispatch => {
     // IDが存在しない場合は新規登録処理
     // API通信を行う(POST /items)
     try {
-      const responseItemForm = await saveItemForm(token, formItem);
+      const responseItemForm = await saveItemForm(formItem);
       dispatch({
         type: actionType.ADD_TOAST_MESSAGE,
         payload: "商品フォームの登録に成功しました。"
@@ -452,12 +417,7 @@ export const submitItemForm = (token, item) => async dispatch => {
       }
 
       await axios
-        .get(`${API_BASE_PATH}/items`, {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        })
+        .get(`${API_BASE_PATH}/items`)
         .then(responseSearchResult => {
           dispatch({
             type: actionType.FETCH_ITEM_FULFILLED,
@@ -524,12 +484,7 @@ export const deleteItem = (token, id) => dispatch => {
   dispatch({ type: actionType.DELETE_ITEM });
   // API通信を行う (DELETE /items/:id)
   axios
-    .delete(`${API_BASE_PATH}/items/${id}`, {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    })
+    .delete(`${API_BASE_PATH}/items/${id}`)
     .then(() => {
       dispatch({ type: actionType.DELETE_ITEM_FULFILLED });
       dispatch({
@@ -539,12 +494,7 @@ export const deleteItem = (token, id) => dispatch => {
 
       // 一覧を再検索
       axios
-        .get(`${API_BASE_PATH}/items`, {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        })
+        .get(`${API_BASE_PATH}/items`)
         .then(responseSearchResult => {
           dispatch({
             type: actionType.FETCH_ITEM_FULFILLED,
@@ -583,19 +533,13 @@ export const deleteItem = (token, id) => dispatch => {
 
 /**
  * 商品画像を削除する
- * @param token
  * @param id 削除対象商品のID
  */
-export const deleteItemImage = (token, id) => dispatch => {
+export const deleteItemImage = (id) => dispatch => {
   dispatch({ type: actionType.DELETE_ITEM_IMAGE });
   // API通信を行う (DELETE /item/image/:id)
   axios
-    .delete(`${API_BASE_PATH}/items/image/${id}`, {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    })
+    .delete(`${API_BASE_PATH}/items/image/${id}`)
     .then(() => {
       dispatch({
         type: actionType.DELETE_ITEM_IMAGE_FULFILLED,
