@@ -106,19 +106,19 @@ export const fetchItems = token => async dispatch => {
 const validateItem = item => {
   let result = {};
 
-  if (item.title === "") {
+  if (!item.title) {
     result.title = "商品名を入力してください。";
   } else if (item.title.length > 100) {
     result.title = "商品名は100文字以内で入力してください。";
   }
 
-  if (item.description === "") {
+  if (!item.description) {
     result.description = "商品説明を入力してください。";
   } else if (item.description.length > 500) {
     result.description = "商品説明は500文字以内で入力してください。";
   }
 
-  if (item.price === "") {
+  if (!item.price) {
     result.price = "商品価格を入力してください。";
   } else if (!item.price.match(/^\d{1,3}(,\d{3})*$/)) {
     result.price = "商品価格は半角数字で入力してください。";
@@ -135,7 +135,7 @@ const validateItem = item => {
  */
 const validateSearchKeyWord = keyword => {
   let result = {};
-  if (keyword === "") {
+  if (!keyword) {
     result.title = "検索ワードを入力してください";
   }
 
@@ -171,7 +171,7 @@ export const searchItems = (token, keyword) => dispatch => {
           payload: `${data.length}件の商品が見つかりました`
         });
         for (const item of data) {
-          if (item.imagePath !== null && item.imagePath !== undefined) {
+          if (!item.imagePath) {
             searchImage(token, item.id).then(response => {
               response.blob().then(image => {
                 const imageUrl = URL.createObjectURL(image);
@@ -343,7 +343,7 @@ export const submitItemForm = (token, item) => async dispatch => {
 
   dispatch({ type: actionType.SUBMIT_ITEM });
   // IDが存在する場合は更新処理
-  if (item.id !== null && item.id !== undefined && item.id !== "") {
+  if (!item.id) {
     try {
       // API通信を行う(PUT /items/:id)
       await axios
@@ -356,7 +356,7 @@ export const submitItemForm = (token, item) => async dispatch => {
           });
         });
       // 画像が選択されていた場合、画像を更新
-      if (item.image_file !== null && item.image_file !== undefined) {
+      if (!item.image_file) {
         await saveItemImage(item.image_file, item.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
@@ -407,7 +407,7 @@ export const submitItemForm = (token, item) => async dispatch => {
         payload: "商品フォームの登録に成功しました。"
       });
       // 画像が選択されていた場合、画像をDBに登録する
-      if (item.image_file !== null && item.image_file !== undefined) {
+      if (!item.image_file) {
         await saveItemImage(token, item.image_file, responseItemForm.data.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
@@ -424,7 +424,7 @@ export const submitItemForm = (token, item) => async dispatch => {
             payload: responseSearchResult.data
           });
           for (const item of responseSearchResult.data) {
-            if (item.imagePath !== null && item.imagePath !== undefined) {
+            if (!item.imagePath) {
               searchImage(token, item.id).then(response => {
                 response.blob().then(image => {
                   const imageUrl = URL.createObjectURL(image);
@@ -501,7 +501,7 @@ export const deleteItem = (token, id) => dispatch => {
             payload: responseSearchResult.data
           });
           for (const item of responseSearchResult.data) {
-            if (item.imagePath !== null && item.imagePath !== undefined) {
+            if (!item.imagePath) {
               searchImage(token, item.id).then(response => {
                 response.blob().then(image => {
                   const imageUrl = URL.createObjectURL(image);
