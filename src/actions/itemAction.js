@@ -75,7 +75,7 @@ export const fetchItems = token => async dispatch => {
         });
 
         for (const item of responseSearchResult.data) {
-          if (item.imagePath !== null && item.imagePath !== undefined) {
+          if (!item.imagePath) {
             searchImage(token, item.id).then(response => {
               response.blob().then(image => {
                 const imageUrl = URL.createObjectURL(image);
@@ -158,7 +158,7 @@ export const searchItems = (token, keyword) => dispatch => {
   }
   dispatch({ type: actionType.FETCH_ITEM });
   dispatch(push(`/items/search/${encodeURI(keyword)}`));
-  if (keyword !== null && keyword !== "") {
+  if (!keyword) {
     // API通信を行う
     searchResult(keyword).then(response => {
         response.json().then(data => {
@@ -373,7 +373,7 @@ export const submitItemForm = (token, item) => async dispatch => {
             payload: responseSearchResult.data
           });
           for (const item of responseSearchResult.data) {
-            if (item.imagePath !== null && item.imagePath !== undefined) {
+            if (!item.imagePath) {
               searchImage(token, item.id).then(response => {
                 response.blob().then(image => {
                   const imageUrl = URL.createObjectURL(image);
