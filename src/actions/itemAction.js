@@ -54,7 +54,11 @@ const saveItemForm = (formItem) => {
 const saveItemImage = (imageFile, id) => {
   const params = new FormData();
   params.append("image", imageFile);
-  return axios.post(`${API_BASE_PATH}/items/image/${id}`, params);
+  return axios.post(`${API_BASE_PATH}/items/image/${id}`, params, {
+    headers: {
+        "Content-type": "multipart/form-data",
+    }
+  });
 };
 
 /**
@@ -75,7 +79,7 @@ export const fetchItems = token => async dispatch => {
         });
 
         for (const item of responseSearchResult.data) {
-          if (!item.imagePath) {
+          if (item.imagePath) {
             searchImage(token, item.id).then(response => {
               response.blob().then(image => {
                 const imageUrl = URL.createObjectURL(image);
@@ -158,7 +162,7 @@ export const searchItems = (token, keyword) => dispatch => {
   }
   dispatch({ type: actionType.FETCH_ITEM });
   dispatch(push(`/items/search/${encodeURI(keyword)}`));
-  if (!keyword) {
+  if (keyword) {
     // API通信を行う
     searchResult(keyword).then(response => {
         response.json().then(data => {
@@ -171,7 +175,7 @@ export const searchItems = (token, keyword) => dispatch => {
           payload: `${data.length}件の商品が見つかりました`
         });
         for (const item of data) {
-          if (!item.imagePath) {
+          if (item.imagePath) {
             searchImage(token, item.id).then(response => {
               response.blob().then(image => {
                 const imageUrl = URL.createObjectURL(image);
@@ -343,7 +347,7 @@ export const submitItemForm = (token, item) => async dispatch => {
 
   dispatch({ type: actionType.SUBMIT_ITEM });
   // IDが存在する場合は更新処理
-  if (!item.id) {
+  if (item.id) {
     try {
       // API通信を行う(PUT /items/:id)
       await axios
@@ -356,7 +360,7 @@ export const submitItemForm = (token, item) => async dispatch => {
           });
         });
       // 画像が選択されていた場合、画像を更新
-      if (!item.imageFile) {
+      if (item.imageFile) {
         await saveItemImage(item.imageFile, item.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
@@ -373,7 +377,7 @@ export const submitItemForm = (token, item) => async dispatch => {
             payload: responseSearchResult.data
           });
           for (const item of responseSearchResult.data) {
-            if (!item.imagePath) {
+            if (item.imagePath) {
               searchImage(token, item.id).then(response => {
                 response.blob().then(image => {
                   const imageUrl = URL.createObjectURL(image);
@@ -407,8 +411,8 @@ export const submitItemForm = (token, item) => async dispatch => {
         payload: "商品フォームの登録に成功しました。"
       });
       // 画像が選択されていた場合、画像をDBに登録する
-      if (!item.image_ile) {
-        await saveItemImage(token, item.imageFile, responseItemForm.data.id);
+      if (item.image_ile) {
+        await saveItemImage(item.imageFile, responseItemForm.data.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
           type: actionType.ADD_TOAST_MESSAGE,
@@ -424,7 +428,7 @@ export const submitItemForm = (token, item) => async dispatch => {
             payload: responseSearchResult.data
           });
           for (const item of responseSearchResult.data) {
-            if (!item.imagePath) {
+            if (item.imagePath) {
               searchImage(token, item.id).then(response => {
                 response.blob().then(image => {
                   const imageUrl = URL.createObjectURL(image);
@@ -501,7 +505,7 @@ export const deleteItem = (token, id) => dispatch => {
             payload: responseSearchResult.data
           });
           for (const item of responseSearchResult.data) {
-            if (!item.imagePath) {
+            if (item.imagePath) {
               searchImage(token, item.id).then(response => {
                 response.blob().then(image => {
                   const imageUrl = URL.createObjectURL(image);
