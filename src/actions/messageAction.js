@@ -13,7 +13,7 @@ export const addToastMessage = (message) => {
 
 /**
  * トーストメッッセージを削除する
- * @param index 削除対象のインデックス
+ * @param index 削除対象のメッセージが入っている配列のインデックス
  */
 export const removeToastMessage = (index) => {
   return {
