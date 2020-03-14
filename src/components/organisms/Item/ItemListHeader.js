@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../atoms/Button.js";
+import { Button } from "@material-ui/core";
 import SearchForm from "../../molecules/Form/SearchForm.js";
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";

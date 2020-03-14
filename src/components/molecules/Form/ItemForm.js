@@ -1,6 +1,6 @@
 import React from "react";
 import InputFile from "../../atoms/InputFile.js";
-import Button from "../../atoms/Button.js";
+import { Button } from "@material-ui/core";
 import Image from "../../atoms/Image.js";
 import none from "../../../images/none.png";
 import TextField from "../../atoms/TextField.js";

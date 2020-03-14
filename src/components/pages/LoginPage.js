@@ -8,7 +8,7 @@ import LoginContent from "../templates/LoginContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import Image from "../atoms/Image.js";
-import Button from "../atoms/Button.js";
+import { Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import styles from "../../styles/loginPage";

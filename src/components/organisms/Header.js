@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../atoms/Button.js";
+import { Button } from "@material-ui/core";
 import AppBar from "@material-ui/core/es/AppBar/AppBar";
 import Toolbar from "@material-ui/core/es/Toolbar/Toolbar";
 import { Typography } from "@material-ui/core";
