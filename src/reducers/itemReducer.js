@@ -3,23 +3,23 @@ import actionType from '../actions/actionType';
 const initialItemState = {
   items: [],
   itemForm: {
-    id: null,
+    id: undefined,
     title: '',
     description: '',
     price: '',
-    image: null,
-    imageFile: null,
+    image: undefined,
+    imageFile: undefined,
   },
   itemFormErrors: {},
   formTitle: '',
   showForm: false,
-  deleteItemId: null,
+  deleteItemId: undefined,
   showDeleteDialog: false,
   searchKeyword: '',
   loading: false,
-  error: null,
-  showItemMenuId: null,
-  menuAnchor: null,
+  error: undefined,
+  showItemMenuId: undefined,
+  menuAnchor: undefined,
 };
 
 const reducer = (state = initialItemState, action) => {
@@ -50,7 +50,7 @@ const reducer = (state = initialItemState, action) => {
     case actionType.DELETE_ITEM_IMAGE_FULFILLED:
       for (const item of state.items) {
         if (item.id === action.payload){
-          item.image_url = null;
+          item.image_url = undefined;
         }
       }
       return { ...state, loading: false };
@@ -90,7 +90,7 @@ const reducer = (state = initialItemState, action) => {
       state.showItemMenuId = action.payload.id;
       return { ...state };
     case actionType.HIDE_ITEM_MENU:
-      return { ...state, showItemMenuId: null, menuAnchor: null };
+      return { ...state, showItemMenuId: undefined, menuAnchor: undefined };
     case actionType.DISABLED_LOADING:
       return { ...state, loading: false };
     default:
