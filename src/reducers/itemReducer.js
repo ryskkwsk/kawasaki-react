@@ -24,11 +24,13 @@ const initialItemState = {
 
 const reducer = (state = initialItemState, action) => {
   switch (action.type) {
-    case actionType.FETCH_ITEM:
+    case actionType.LOADING_SHOW:
       return { ...state, loading: true };
+    case actionType.LOADING_HIDE:
+      return { ...state, loading: false };
     case actionType.FETCH_ITEM_FULFILLED:
       return {
-        ...state, items: action.payload, loading: false,
+        ...state, items: action.payload
       };
     case actionType.ADD_ITEM_IMAGE:
       for (const item of state.items) {
@@ -37,23 +39,21 @@ const reducer = (state = initialItemState, action) => {
         }
       }
       return {...state };
-    case actionType.SUBMIT_ITEM:
-      return { ...state, loading: true };
     case actionType.SUBMIT_ITEM_FULFILLED:
-      return { ...state, loading: false };
+      return { ...state };
     case actionType.DELETE_ITEM:
-      return { ...state, loading: true };
+      return { ...state };
     case actionType.DELETE_ITEM_FULFILLED:
-      return { ...state, loading: false };
+      return { ...state };
     case actionType.DELETE_ITEM_IMAGE:
-      return { ...state, loading: true };
+      return { ...state };
     case actionType.DELETE_ITEM_IMAGE_FULFILLED:
       for (const item of state.items) {
         if (item.id === action.payload){
           item.image_url = undefined;
         }
       }
-      return { ...state, loading: false };
+      return { ...state };
     case actionType.SET_ITEM_SEARCH_KEYWORD:
       return { ...state, searchKeyword: action.payload };
     case actionType.SET_FORM_TITLE:
@@ -91,8 +91,6 @@ const reducer = (state = initialItemState, action) => {
       return { ...state };
     case actionType.HIDE_ITEM_MENU:
       return { ...state, showItemMenuId: undefined, menuAnchor: undefined };
-    case actionType.DISABLED_LOADING:
-      return { ...state, loading: false };
     default:
       return state;
   }

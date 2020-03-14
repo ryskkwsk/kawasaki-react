@@ -63,7 +63,7 @@ const saveItemImage = (imageFile, id) => {
  * @param keyword 検索キーワード
  */
 export const fetchItems = token => async dispatch => {
-  dispatch({ type: actionType.FETCH_ITEM });
+  dispatch({ type: actionType.LOADING_SHOW });
   dispatch(push(`/items/search`));
   try {
     await axios
@@ -73,6 +73,7 @@ export const fetchItems = token => async dispatch => {
           type: actionType.FETCH_ITEM_FULFILLED,
           payload: responseSearchResult.data
         });
+        dispatch({ type: actionType.LOADING_HIDE });
 
         for (const item of responseSearchResult.data) {
           if (item.imagePath) {
@@ -156,21 +157,20 @@ export const searchItems = (token, keyword) => dispatch => {
       payload: validateResults.title
     });
   }
-  dispatch({ type: actionType.FETCH_ITEM });
+  dispatch({ type: actionType.LOADING_SHOW });
   dispatch(push(`/items/search/${encodeURI(keyword)}`));
   if (keyword) {
     // API通信を行う
     searchResult(keyword).then(response => {
-        response.json().then(data => {
         dispatch({
           type: actionType.FETCH_ITEM_FULFILLED,
-          payload: data
+          payload: response.data
         });
         dispatch({
           type: actionType.ADD_TOAST_MESSAGE,
-          payload: `${data.length}件の商品が見つかりました`
+          payload: `${response.data.length}件の商品が見つかりました`
         });
-        for (const item of data) {
+        for (const item of response.data) {
           if (item.imagePath) {
             searchImage(token, item.id).then(response => {
               response.blob().then(image => {
@@ -186,7 +186,7 @@ export const searchItems = (token, keyword) => dispatch => {
             });
           }
         }
-        })
+        dispatch({ type: actionType.LOADING_HIDE });
       })
       .catch(error => {
         const actions = handleItemActionError(error);
@@ -197,6 +197,7 @@ export const searchItems = (token, keyword) => dispatch => {
   }
   else {
     // 検索ワードが空だったら空の配列を返す
+    dispatch({ type: actionType.LOADING_SHOW });
     dispatch({
       type: actionType.FETCH_ITEM_FULFILLED,
       payload: []
@@ -341,7 +342,7 @@ export const submitItemForm = (token, item) => async dispatch => {
     price: item.price.replace(/,/g, "")
   };
 
-  dispatch({ type: actionType.SUBMIT_ITEM });
+  dispatch({ type: actionType.LOADING_SHOW });
   // IDが存在する場合は更新処理
   if (item.id) {
     try {
@@ -388,9 +389,11 @@ export const submitItemForm = (token, item) => async dispatch => {
               });
             }
           }
+          dispatch({ type: actionType.LOADING_HIDE });
         });
       // フォームを初期化して閉じる
       closeSubmitForm();
+      dispatch({ type: actionType.LOADING_HIDE });
     } catch (error) {
       const actions = handleItemActionError(error);
       for (const action of actions) {
@@ -442,6 +445,7 @@ export const submitItemForm = (token, item) => async dispatch => {
         });
       // フォームを初期化して閉じる
       closeSubmitForm();
+      dispatch({ type: actionType.LOADING_HIDE });
     } catch (error) {
       const actions = handleItemActionError(error);
       for (const action of actions) {
@@ -481,6 +485,7 @@ export const hideDeleteDialog = () => dispatch => {
  * @param id 削除対象商品のID
  */
 export const deleteItem = (token, id) => dispatch => {
+  dispatch({ type: actionType.LOADING_SHOW });
   dispatch({ type: actionType.DELETE_ITEM });
   // API通信を行う (DELETE /items/:id)
   axios
@@ -500,6 +505,7 @@ export const deleteItem = (token, id) => dispatch => {
             type: actionType.FETCH_ITEM_FULFILLED,
             payload: responseSearchResult.data
           });
+          dispatch({ type: actionType.LOADING_HIDE });
           for (const item of responseSearchResult.data) {
             if (item.imagePath) {
               searchImage(token, item.id).then(response => {
@@ -512,6 +518,7 @@ export const deleteItem = (token, id) => dispatch => {
                       id: item.id
                     }
                   });
+                  dispatch({ type: actionType.LOADING_HIDE });
                 });
               });
             }
@@ -536,6 +543,7 @@ export const deleteItem = (token, id) => dispatch => {
  * @param id 削除対象商品のID
  */
 export const deleteItemImage = (id) => dispatch => {
+  dispatch({ type: actionType.LOADING_SHOW });
   dispatch({ type: actionType.DELETE_ITEM_IMAGE });
   // API通信を行う (DELETE /item/image/:id)
   axios
@@ -545,6 +553,7 @@ export const deleteItemImage = (id) => dispatch => {
         type: actionType.DELETE_ITEM_IMAGE_FULFILLED,
         payload: id
       });
+      dispatch({ type: actionType.LOADING_HIDE });
       dispatch({
         type: actionType.ADD_TOAST_MESSAGE,
         payload: `商品画像の削除に成功しました。(ID: ${id})`
@@ -607,7 +616,7 @@ const handleItemActionError = error => {
     // サーバーエラーの場合
     return [
       { type: actionType.HANDLE_SERVER_ERROR },
-      { type: actionType.DISABLED_LOADING }
+      { type: actionType.LOADING_HIDE }
     ];
   }
 };
