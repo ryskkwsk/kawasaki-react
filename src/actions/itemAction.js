@@ -43,7 +43,7 @@ const searchResult = (keyword) => {
  * @param {*} formItem 商品フォームにセットされた情報
  */
 const saveItemForm = (formItem) => {
-  return axios.post(`${API_BASE_PATH}/items`, formItem, {headers: { "Content-type": "multipart/form-data" }});
+  return axios.post(`${API_BASE_PATH}/items`, formItem);
 };
 
 /**
