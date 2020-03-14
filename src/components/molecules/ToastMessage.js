@@ -1,5 +1,5 @@
 import React from "react";
-import IconButton from "../atoms/IconButton.js";
+import { IconButton } from "@material-ui/core";
 
 const ToastMessage = props => (
   <div className={props.className} style={props.style}>

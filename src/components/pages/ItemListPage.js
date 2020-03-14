@@ -135,7 +135,7 @@ class ItemListPage extends React.Component {
    * 商品画像削除ボタン押下時の処理
    */
   handleDeleteImage = id => {
-    this.props.itemAction.deleteItemImage(this.props.accessToken, id);
+    this.props.itemAction.deleteItemImage(id);
   };
 
   /**

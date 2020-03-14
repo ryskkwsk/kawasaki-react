@@ -1,7 +1,7 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
-import IconButton from "../../atoms/IconButton.js";
+import { IconButton } from "@material-ui/core";
 
 const SearchForm = props => {
   const { classes } = props;

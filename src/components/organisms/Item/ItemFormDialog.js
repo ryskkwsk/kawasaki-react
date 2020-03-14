@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import CloseIcon from "@material-ui/icons/Close";
 import ItemForm from "../../molecules/Form/ItemForm.js";
-import IconButton from "../../atoms/IconButton.js";
+import { IconButton } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
 const ItemFormDialog = props => {
