@@ -10,7 +10,7 @@ const Header = props => (
       <Toolbar className={props.classes.toolbar}>
         <Typography
           className={props.classes.logo}
-          variant={"h4"}
+          variant="h4"
           onClick={props.handleImageClick}
         >
           {"商品管理アプリケーション"}

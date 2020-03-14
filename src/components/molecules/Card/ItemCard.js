@@ -36,7 +36,7 @@ const ItemCard = props => {
             );
           })}
         </Typography>
-        <Typography gutterBottom variant="h6" align={"right"}>
+        <Typography gutterBottom variant="h6" align="right">
           ¥{props.priceText}
         </Typography>
         <IconButton

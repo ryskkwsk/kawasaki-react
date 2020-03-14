@@ -185,7 +185,7 @@ class ItemListPage extends React.Component {
           fullWidth={true}
           maxWidth={width === "sm" ? "sm" : "md"}
           titleText={this.props.item.formTitle}
-          disagreeText={"キャンセル"}
+          disagreeText="キャンセル"
           agreeText={this.props.item.formTitle}
           handleClose={this.props.itemAction.hideItemForm}
           handleSubmit={this.handleFormSubmit.bind(this)}
@@ -201,24 +201,24 @@ class ItemListPage extends React.Component {
         <ItemListHeader
           classes={classes}
           searchKeyword={this.props.item.searchKeyword}
-          placeholder={"検索ワード"}
+          placeholder="検索ワード"
           onChange={this.onKeywordChange}
           searchItem={this.props.itemAction.searchItems.bind(
             null,
             this.props.accessToken,
             this.props.item.searchKeyword
           )}
-          searchText={"検索"}
+          searchText="検索"
           createOnClick={this.props.itemAction.showCreateForm.bind(
             null,
             "登録"
           )}
-          createText={"新規作成"}
+          createText="新規作成"
         />
         {this.props.item.loading ? (
           <div className={classes.loading}>
-            <img src={loading} alt={"ローディング"} width={100} />
-            <Typography color={"primary"} variant={"h6"}>
+            <img src={loading} alt="ローディング" width={100} />
+            <Typography color="primary" variant="h6">
               LOADING
             </Typography>
           </div>
@@ -249,16 +249,16 @@ class ItemListPage extends React.Component {
             <Header
               classes={classes}
               display={width}
-              menuId={"headerMenu"}
-              anchor={""}
+              menuId="headerMenu"
+              anchor=""
               image={login}
-              alt={"ロゴ"}
-              width={"400px"}
+              alt="ロゴ"
+              width="400px"
               handleImageClick={this.handleLogoClick}
-              variant={"outlined"}
-              color={"inherit"}
+              variant="outlined"
+              color="inherit"
               onClick={this.props.logout}
-              text={"ログアウト"}
+              text="ログアウト"
             />
           </header>
         }
@@ -275,10 +275,10 @@ class ItemListPage extends React.Component {
                 this.props.accessToken,
                 this.props.item.deleteItemId
               )}
-              titleText={"商品を削除してもよろしいですか?"}
-              contentText={"削除した商品を元に戻すことはできません。"}
-              disagreeText={"キャンセル"}
-              agreeText={"削除"}
+              titleText="商品を削除してもよろしいですか?"
+              contentText="削除した商品を元に戻すことはできません。"
+              disagreeText="キャンセル"
+              agreeText="削除"
             />
           </main>
         }

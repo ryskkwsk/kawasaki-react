@@ -16,17 +16,17 @@ const ItemForm = props => {
         <div className={classes.itemFormImage}>
           {props.loading ? (
             <div className={classes.loading}>
-              <img src={loading} alt={"ローディング"} width={100} />
-              <Typography color={"primary"} variant={"h6"}>
+              <img src={loading} alt="ローディング" width={100} />
+              <Typography color="primary" variant="h6">
                 LOADING
               </Typography>
             </div>
           ) : (
-            <label htmlFor={"itemFile"}>
+            <label htmlFor="itemFile">
               <Image
                 className={classes.formImage}
                 src={item.image || item.image_url || none}
-                alt={"商品画像"}
+                alt="商品画像"
               />
             </label>
           )}
@@ -34,30 +34,30 @@ const ItemForm = props => {
         <Grid
           container
           className={classes.formImageButtons}
-          justify={"space-around"}
+          justify="space-around"
         >
           <InputFile
-            id={"itemFile"}
-            accept={"image/*"}
+            id="itemFile"
+            accept="image/*"
             onChange={props.handleImageChange}
           />
           {item.id && item.image_url && (
             <Button
-              children={"画像を削除"}
-              variant={"outlined"}
-              color={"secondary"}
+              children="画像を削除"
+              variant="outlined"
+              color="secondary"
               onClick={props.handleDeleteImage.bind(null, item.id)}
             />
           )}
         </Grid>
       </Grid>
-      <Grid container item justify={"center"} sm={12} md={6}>
+      <Grid container item justify="center" sm={12} md={6}>
         <Grid item sm={12}>
           <TextField
             autoFocus={true}
             required={true}
-            label={"商品名"}
-            margin={"normal"}
+            label="商品名"
+            margin="normal"
             fullWidth={true}
             defaultValue={item.title}
             onBlur={props.handleTitleChange}
@@ -73,8 +73,8 @@ const ItemForm = props => {
             required={true}
             multiline={true}
             rows={4}
-            label={"商品説明"}
-            margin={"normal"}
+            label="商品説明"
+            margin="normal"
             fullWidth={true}
             defaultValue={item.description}
             onBlur={props.handleDescriptionChange}
@@ -88,8 +88,8 @@ const ItemForm = props => {
         <Grid item sm={12}>
           <TextField
             required={true}
-            label={"商品価格"}
-            margin={"normal"}
+            label="商品価格"
+            margin="normal"
             defaultValue={item.price}
             onBlur={props.handlePriceChange}
             error={formErrors.price}

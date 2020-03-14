@@ -5,7 +5,7 @@ const InputFile = props => (
   <div>
     <input
       style={{ display: "none" }}
-      type={"file"}
+      type="file"
       id={props.id}
       accept={props.accept}
       onChange={props.onChange}
@@ -14,7 +14,7 @@ const InputFile = props => (
       <Button
         className={props.className}
         children={props.children || "ファイルを選択"}
-        component={"span"}
+        component="span"
         color={props.color}
         variant={props.variant || "outlined"}
         id={props.id}

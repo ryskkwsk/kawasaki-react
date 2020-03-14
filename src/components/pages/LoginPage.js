@@ -49,10 +49,10 @@ class LoginPage extends Component {
           <main className={classes.main}>
             <CssBaseline />
             <Paper className={classes.paper}>
-              <Image src={login} alt={"ログイン画像"} width={"100%"} />
+              <Image src={login} alt="ログイン画像" width="100%" />
               <div className={classes.buttons}>
                 <Button
-                  variant={"contained"}
+                  variant="contained"
                   onClick={this.gitHubLogin}
                   children={
                     <div>

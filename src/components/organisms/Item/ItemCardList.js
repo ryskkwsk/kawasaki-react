@@ -12,8 +12,8 @@ const ItemCardList = props => (
         id={item.id}
         delete={props.handleDeleteItem.bind(null, item.id)}
         update={props.handleUpdateItem.bind(null, item, "更新")}
-        width={"300px"}
-        height={"300px"}
+        width="300px"
+        height="300px"
         alt={item.title}
         titleText={item.title}
         descriptionText={item.description}

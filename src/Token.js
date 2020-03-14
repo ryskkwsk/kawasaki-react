@@ -26,7 +26,7 @@ class Token extends Component {
    * TOPページにリダイレクトする
    */
   render() {
-    return <Redirect to={"/"} />;
+    return <Redirect to="/" />;
   }
 }
 

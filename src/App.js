@@ -30,12 +30,12 @@ class App extends React.Component {
     <div>
       <Switch>
         {/* 認証が不要なルーティング */}
-        <Route exact path={"/login"} component={LoginPage} />
-        <Route path={"/token/:token"} component={Token} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route path="/token/:token" component={Token} />
         {/* 認証が必要なルーティング */}
         <Auth>
           <Switch>
-            <Route path={"/"} component={ItemListPage} />
+            <Route path="/" component={ItemListPage} />
           </Switch>
         </Auth>
         <Route exact component={NotFound} />

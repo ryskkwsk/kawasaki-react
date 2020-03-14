@@ -22,7 +22,7 @@ const ItemFormDialog = props => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        <Grid container justify={"space-between"} alignItems={"center"}>
+        <Grid container justify="space-between" alignItems="center">
           <div className={classes.itemFormTitle}>{props.titleText}</div>
           <IconButton
             children={<CloseIcon />}
@@ -49,13 +49,13 @@ const ItemFormDialog = props => {
       <DialogActions>
         <Button
           children={props.disagreeText}
-          variant={"outlined"}
+          variant="outlined"
           onClick={props.handleClose}
         />
         <Button
           children={props.agreeText}
-          variant={"outlined"}
-          color={"primary"}
+          variant="outlined"
+          color="primary"
           onClick={props.handleSubmit}
         />
       </DialogActions>

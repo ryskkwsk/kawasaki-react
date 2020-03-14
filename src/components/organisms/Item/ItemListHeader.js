@@ -7,12 +7,12 @@ import SearchIcon from "@material-ui/icons/Search";
 const ItemListHeader = props => {
   const { classes } = props;
   return (
-    <Grid container alignItems={"center"} justify={"flex-start"}>
+    <Grid container alignItems="center" justify="flex-start">
       <Grid item xs={12} md={8}>
         <SearchForm
           classes={classes}
           children={<SearchIcon />}
-          color={"primary"}
+          color="primary"
           onClick={props.searchItem}
           searchKeyword={props.searchKeyword}
           onChange={props.onChange}
@@ -23,8 +23,8 @@ const ItemListHeader = props => {
       <Grid item xs={12} md={4}>
         <Button
           className={classes.newButton}
-          variant={"outlined"}
-          color={"primary"}
+          variant="outlined"
+          color="primary"
           onClick={props.createOnClick}
           children={props.createText}
         />
