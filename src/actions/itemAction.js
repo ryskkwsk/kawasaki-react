@@ -54,11 +54,7 @@ const saveItemForm = (formItem) => {
 const saveItemImage = (imageFile, id) => {
   const params = new FormData();
   params.append("image", imageFile);
-  return axios.post(`${API_BASE_PATH}/items/image/${id}`, params, {
-    headers: {
-        "Content-type": "multipart/form-data",
-    }
-  });
+  return axios.post(`${API_BASE_PATH}/items/image/${id}`, params);
 };
 
 /**
@@ -411,7 +407,7 @@ export const submitItemForm = (token, item) => async dispatch => {
         payload: "商品フォームの登録に成功しました。"
       });
       // 画像が選択されていた場合、画像をDBに登録する
-      if (item.image_ile) {
+      if (item.imageFile) {
         await saveItemImage(item.imageFile, responseItemForm.data.id);
         dispatch({ type: actionType.SUBMIT_ITEM_FULFILLED });
         dispatch({
