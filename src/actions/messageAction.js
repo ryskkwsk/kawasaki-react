@@ -1,4 +1,4 @@
-import actionType from '../config/actionType';
+import actionType from './actionType';
 
 /**
  * トーストメッセージを追加する

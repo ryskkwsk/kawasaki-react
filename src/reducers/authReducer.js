@@ -1,4 +1,4 @@
-import actionType from "../config/actionType";
+import actionType from "../actions/actionType";
 import Cookies from 'js-cookie';
 
 const TOKEN_KEY = "accessToken";

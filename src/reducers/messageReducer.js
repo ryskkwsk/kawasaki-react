@@ -1,4 +1,4 @@
-import actionType from "../config/actionType";
+import actionType from "../actions/actionType";
 
 const initialMessageState = {
   toastMessages: [],

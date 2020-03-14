@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import actionType from "../config/actionType";
+import actionType from "./actionType";
 import axios from '../config/Interceptors';
 
 const API_BASE_PATH = process.env.REACT_APP_API_ROUTE;

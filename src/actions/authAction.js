@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import actionType from '../config/actionType';
+import actionType from './actionType';
 
 /**
  * ログイン処理
