@@ -13,12 +13,12 @@ const initialItemState = {
   itemFormErrors: {},
   formTitle: '',
   showForm: false,
-  deleteITEMId: null,
+  deleteItemId: null,
   showDeleteDialog: false,
   searchKeyword: '',
   loading: false,
   error: null,
-  showITEMMenuId: null,
+  showItemMenuId: null,
   menuAnchor: null,
 };
 
@@ -87,10 +87,10 @@ const reducer = (state = initialItemState, action) => {
       state.showDeleteDialog = !state.showDeleteDialog;
       return { ...state };
     case actionType.SHOW_ITEM_MENU:
-      state.showITEMMenuId = action.payload.id;
+      state.showItemMenuId = action.payload.id;
       return { ...state };
     case actionType.HIDE_ITEM_MENU:
-      return { ...state, showITEMMenuId: null, menuAnchor: null };
+      return { ...state, showItemMenuId: null, menuAnchor: null };
     case actionType.DISABLED_LOADING:
       return { ...state, loading: false };
     default:
