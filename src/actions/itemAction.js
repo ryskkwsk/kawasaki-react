@@ -121,7 +121,7 @@ const validateItem = item => {
 
   if (!item.price) {
     result.price = "商品価格を入力してください。";
-  } else if (!item.price.match(/^\d{1,3}(,\d{3})*$/)) {
+  } else if (item.price.match(/^[0-9]+$/)) {
     result.price = "商品価格は半角数字で入力してください。";
   } else if (item.price.length > 9) {
     result.price = "商品価格の上限は9,999,999です";
