@@ -106,6 +106,7 @@ export const fetchItems = token => async dispatch => {
  */
 const validateItem = item => {
   let result = {};
+  const itemPricepattern = new RegExp(/^\d+$/, 'g');
 
   if (!item.title) {
     result.title = "商品名を入力してください。";
@@ -121,7 +122,7 @@ const validateItem = item => {
 
   if (!item.price) {
     result.price = "商品価格を入力してください。";
-  } else if (item.price.match(/^[0-9]+$/)) {
+  } else if (itemPricepattern.test(item.price)) {
     result.price = "商品価格は半角数字で入力してください。";
   } else if (item.price.length > 9) {
     result.price = "商品価格の上限は9,999,999です";
