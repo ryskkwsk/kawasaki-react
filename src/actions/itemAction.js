@@ -106,7 +106,7 @@ export const fetchItems = token => async dispatch => {
  */
 const validateItem = item => {
   let result = {};
-  const itemPricepattern = new RegExp(/^\d+$/, 'g');
+  const itemPricepattern = new RegExp(/^[^0-9]+$/);
 
   if (!item.title) {
     result.title = "商品名を入力してください。";

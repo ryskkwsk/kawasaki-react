@@ -89,16 +89,15 @@ class ItemListPage extends React.Component {
    * 商品価格変更時の処理
    */
   handlePriceChange = e => {
-    // 数字以外を取り除く → 全角から半角に変換
+    // 全角から半角に変換
     const price = e.target.value
-      .replace(/[^0-9０-９]/g, "")
       .replace(/[[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xfee0));
     // 末尾から3桁毎にカンマを挿入(上限を9,999,999に設定)
     const formatPrice =
       price.length > 7 ? "9,999,999" : Number(price).toLocaleString();
     // フォームの値とStoreの値を変更
     e.target.value = formatPrice;
-    this.props.itemAction.setItemPrice(formatPrice);
+    this.props.itemAction.setItemPrice(e.target.value);
   };
 
   /**
