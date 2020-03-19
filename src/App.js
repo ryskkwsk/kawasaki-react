@@ -1,8 +1,9 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
+
 
 import * as authAction from "./actions/authAction";
 
@@ -27,20 +28,23 @@ function mapDispatchToProps(dispatch) {
  */
 class App extends React.Component {
   render = () => (
-    <div>
-      <Switch>
-        {/* 認証が不要なルーティング */}
-        <Route exact path="/login" component={LoginPage} />
-        <Route path="/token/:token" component={Token} />
-        {/* 認証が必要なルーティング */}
-        <Auth>
-          <Switch>
-            <Route path="/" component={ItemListPage} />
-          </Switch>
-        </Auth>
-        <Route exact component={NotFound} />
-      </Switch>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          {/* 認証が不要なルーティング */}
+          <Route exact={true} path="/login" component={LoginPage} />
+          <Route exact={true} path="/token/:token" component={Token} />
+          {/* 認証が必要なルーティング */}
+          <Auth>
+            <Switch>
+              <Route exact={true} path="/" component={ItemListPage} />
+              <Route exact={true} path="/items/search" component={ItemListPage} />
+              <Route component={NotFound} />
+            </Switch>
+          </Auth>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
