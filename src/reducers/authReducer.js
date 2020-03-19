@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 const TOKEN_KEY = "accessToken";
 const initialAuthState = {
   accessToken: Cookies.get(TOKEN_KEY),
-  isLogin: Cookies.get(TOKEN_KEY) !== null
+  isLogin: Cookies.get(TOKEN_KEY) !== undefined
 };
 
 const reducer = (state = initialAuthState, action) => {
@@ -21,7 +21,7 @@ const reducer = (state = initialAuthState, action) => {
       Cookies.remove(TOKEN_KEY);
       return {
         ...state,
-        accessToken: null,
+        accessToken: undefined,
         isLogin: false
       };
     default:
