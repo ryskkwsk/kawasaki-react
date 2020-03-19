@@ -1,6 +1,10 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
 
+/**
+ * axiosのheaderの共通設定
+ */
+
 const instance = axios.create({
   headers: {
     "Content-type": "application/json",
