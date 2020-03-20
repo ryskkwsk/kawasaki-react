@@ -1,6 +1,6 @@
 import React from "react";
-import LoginPage from "./components/pages/LoginPage.js";
 import { connect } from "react-redux";
+import { Redirect, withRouter } from 'react-router-dom';
 
 /**
  * Reduxのstateをpropsに展開する
@@ -15,7 +15,7 @@ function mapStateToProps(state) {
  */
 const Auth = props => {
   // ログインしていない場合はログイン画面を表示
-  return props.auth.isLogin ? props.children : <LoginPage />;
+  return props.auth.isLogin ? props.children :  <Redirect to={props.history.push('/login')} />;
 };
 
-export default connect(mapStateToProps)(Auth);
+export default withRouter(connect(mapStateToProps)(Auth));
