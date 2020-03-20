@@ -5,11 +5,11 @@ import axios from '../config/Interceptors';
 const API_BASE_PATH = process.env.REACT_APP_API_ROUTE;
 
 const INITIAL_ITEM_FORM = {
-  id: null,
+  id: undefined,
   title: "",
   description: "",
   price: "",
-  image: null
+  image: undefined
 };
 
 /**
@@ -73,8 +73,6 @@ export const fetchItems = token => async dispatch => {
           type: actionType.FETCH_ITEM_FULFILLED,
           payload: responseSearchResult.data
         });
-        dispatch({ type: actionType.LOADING_HIDE });
-
         for (const item of responseSearchResult.data) {
           if (item.imagePath) {
             searchImage(token, item.id).then(response => {
@@ -91,6 +89,7 @@ export const fetchItems = token => async dispatch => {
             });
           }
         }
+        dispatch({ type: actionType.LOADING_HIDE });
       });
   } catch (error) {
     const actions = handleItemActionError(error);
