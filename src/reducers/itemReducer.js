@@ -62,16 +62,7 @@ const reducer = (state = initialItemState, action) => {
       return { ...state, itemForm: action.payload };
     case actionType.SET_ITEM_FORM_ERRORS:
       return { ...state, itemFormErrors: action.payload };
-    case actionType.SET_ITEM_TITLE:
-      state.itemForm.title = action.payload;
-      return { ...state };
-    case actionType.SET_ITEM_DESCRIPTION:
-      state.itemForm.description = action.payload;
-      return { ...state };
-    case actionType.SET_ITEM_PRICE:
-      state.itemForm.price = action.payload;
-      return { ...state };
-    case actionType.SET_ITEM_IMAGE:
+    case actionType.SET_ITEM_FORM_IMAGE:
       state.itemForm.image = action.payload.image;
       state.itemForm.imageFile = action.payload.imageFile
       return { ...state };

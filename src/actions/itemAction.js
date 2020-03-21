@@ -217,45 +217,23 @@ export const setSearchKeyword = keyword => {
 };
 
 /**
- * 商品タイトルをitemFormにセットする
- * @param title 商品タイトル
+ * 入力された商品項目(タイトル、価格、説明)をitemFormにセットする
+ * @param itemForm 商品
  */
-export const setItemTitle = title => {
+export const setItemForm = itemForm => {
   return {
-    type: actionType.SET_ITEM_TITLE,
-    payload: title
+    type: actionType.SET_ITEM_FORM,
+    payload: itemForm
   };
 };
 
 /**
- * 商品説明をitemFormにセットする
- * @param description 商品説明
- */
-export const setItemDescription = description => {
-  return {
-    type: actionType.SET_ITEM_DESCRIPTION,
-    payload: description
-  };
-};
-
-/**
- * 商品価格をitemFormにセットする
- * @param price 商品価格
- */
-export const setItemPrice = price => {
-  return {
-    type: actionType.SET_ITEM_PRICE,
-    payload: price
-  };
-};
-
-/**
- * 商品画像をitemFormにセットする
+ * 選択された商品画像をitemFormにセットする
  * @param image 商品画像
  */
-export const setItemImage = (image, imageFile) => {
+export const setItemFormImage = (image, imageFile) => {
   return {
-    type: actionType.SET_ITEM_IMAGE,
+    type: actionType.SET_ITEM_FORM_IMAGE,
     payload: { image, imageFile }
   };
 };

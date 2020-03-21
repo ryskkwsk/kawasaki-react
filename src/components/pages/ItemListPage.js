@@ -73,22 +73,25 @@ class ItemListPage extends React.Component {
    * 商品タイトル変更時の処理
    */
   handleTitleChange = e => {
-    const title = e.target.value;
-    this.props.itemAction.setItemTitle(title);
+    let itemForm = this.props.item.itemForm;
+    itemForm.title = e.target.value;
+    this.props.itemAction.setItemForm(itemForm);
   };
 
   /**
    * 商品説明変更時の処理
    */
   handleDescriptionChange = e => {
-    const description = e.target.value;
-    this.props.itemAction.setItemDescription(description);
+    let itemForm = this.props.item.itemForm;
+    itemForm.description = e.target.value;
+    this.props.itemAction.setItemForm(itemForm);
   };
 
   /**
    * 商品価格変更時の処理
    */
   handlePriceChange = e => {
+    let itemForm = this.props.item.itemForm;
     // 全角から半角に変換
     const price = e.target.value
       .replace(/[[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xfee0));
@@ -96,8 +99,8 @@ class ItemListPage extends React.Component {
     const formatPrice =
       price.length > 7 ? "9,999,999" : Number(price).toLocaleString();
     // フォームの値とStoreの値を変更
-    e.target.value = formatPrice;
-    this.props.itemAction.setItemPrice(e.target.value);
+    itemForm.price = formatPrice;
+    this.props.itemAction.setItemForm(itemForm);
   };
 
   /**
@@ -110,13 +113,13 @@ class ItemListPage extends React.Component {
       let file = e.target.files[0];
 
       reader.onloadend = () => {
-        this.props.itemAction.setItemImage(reader.result, file);
+        this.props.itemAction.setItemFormImage(reader.result, file);
       };
 
       reader.readAsDataURL(file);
     } else {
       // 画像を選択しなかった場合
-      this.props.itemAction.setItemImage(null);
+      this.props.itemAction.setItemFormImage(null);
     }
   };
 
