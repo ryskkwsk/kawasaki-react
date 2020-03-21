@@ -217,24 +217,13 @@ export const setSearchKeyword = keyword => {
 };
 
 /**
- * 入力された商品項目(タイトル、価格、説明)をitemFormにセットする
+ * 入力された商品項目(タイトル、価格、説明、画像)をitemFormにセットする
  * @param itemForm 商品
  */
 export const setItemForm = itemForm => {
   return {
     type: actionType.SET_ITEM_FORM,
     payload: itemForm
-  };
-};
-
-/**
- * 選択された商品画像をitemFormにセットする
- * @param image 商品画像
- */
-export const setItemFormImage = (image, imageFile) => {
-  return {
-    type: actionType.SET_ITEM_FORM_IMAGE,
-    payload: { image, imageFile }
   };
 };
 

@@ -107,19 +107,22 @@ class ItemListPage extends React.Component {
    * 商品画像変更時の処理
    */
   handleImageChange = e => {
+    let itemForm = this.props.item.itemForm
     if (e.target.files && e.target.files[0]) {
       // 画像を選択した場合
       let reader = new FileReader();
       let file = e.target.files[0];
 
       reader.onloadend = () => {
-        this.props.itemAction.setItemFormImage(reader.result, file);
+        itemForm.image = reader.result;
+        itemForm.imageFile = file;
+        this.props.itemAction.setItemForm(itemForm);
       };
 
       reader.readAsDataURL(file);
     } else {
       // 画像を選択しなかった場合
-      this.props.itemAction.setItemFormImage(null);
+      this.props.itemAction.setItemForm(itemForm);
     }
   };
 
