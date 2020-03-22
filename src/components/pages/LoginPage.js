@@ -6,6 +6,7 @@ import login from "../../images/login.jpg";
 
 import LoginContent from "../templates/LoginContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import Image from "../atoms/Image.js";
 import { Button } from "@material-ui/core";
@@ -56,11 +57,7 @@ class LoginPage extends Component {
                   onClick={this.gitHubLogin}
                   children={
                     <div>
-                      <FontAwesomeIcon
-                        className={classes.github}
-                        icon={["fab", "github"]}
-                      />
-                      GitHubでログイン
+                      <FontAwesomeIcon className={classes.github} icon={faGithub} />GitHubでログイン
                     </div>
                   }
                 />
