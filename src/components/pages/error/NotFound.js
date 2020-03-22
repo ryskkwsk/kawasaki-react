@@ -3,10 +3,10 @@ import React from "react";
 /**
  * 404ページ
  */
-const NotFound = location =>(
+const NotFound = () =>(
   <div className="flexRowCenter">
   <h3>
-    お探しのページ"<code>{location.pathname}</code>"は見つかりませんでした:
+    お探しのページは見つかりませんでした:
   </h3>
 </div>
 );
