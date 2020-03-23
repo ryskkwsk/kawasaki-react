@@ -5,16 +5,14 @@ import createRootReducer from "../reducers";
 import { routerMiddleware } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import { composeWithDevTools } from "redux-devtools-extension";
-import promise from "redux-promise-middleware";
 import { createLogger } from "redux-logger";
 
 export const history = createBrowserHistory();
 export const devtools = process.env.NODE_ENV === 'production'
-  ? applyMiddleware(routerMiddleware(history),promise,thunk)
+  ? applyMiddleware(routerMiddleware(history),thunk)
   : composeWithDevTools(
     applyMiddleware(
       routerMiddleware(history),
-      promise,
       thunk,
       createLogger({
         diff: true,

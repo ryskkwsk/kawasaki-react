@@ -8,7 +8,6 @@
 * Redux 4.0
 * React-dom 16.1
 * react-redux 7.1
-* redux-promise-middleware 6.1
 * react-router 5.1
 * redux-logger 3.0
 * redux-devtools-extension 2.1
