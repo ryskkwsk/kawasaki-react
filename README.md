@@ -36,16 +36,15 @@ $ nodebrew install-binary stable
 $ nodebrew use {version}
 ```
 
-#### ・node_modulesのインストール
-```
-# npmのローカルインストール
-$ npm install bower
-```
-
 #### ・yarnのインストール
 ```
 # npm 経由でyarnをインストール
 $ npm install -g yarn
+```
+
+#### ・node_modulesのインストール
+```
+$ yarn install
 ```
 
 #### ・サーバー側のアプリケーションを起動する
