@@ -66,37 +66,3 @@ $ cd kawasaki-react-spa
 # アプリケーションをスタート
 $ yarn start
 ```
-
-### ディレクトリ構成
-```
-kawasaki-react
-├── documents //コンポーネント図、データフロー図等
-├── package.json
-├── public
-├── src
-│   ├── App.css
-│   ├── App.js    // 認証とルーティングを行う
-│   ├── Auth.js   // 認証処理
-│   ├── Token.js  // トークン取得処理
-│   ├── actions   // ReduxのAction
-│   ├── components
-│   │   ├── atoms
-│   │   ├── molecules
-│   │   ├── organisms
-│   │   ├── pages
-│   │   │   ├── ItemListPage.js  // ログインページのコンテナ
-│   │   │   └── LoginPage.js     // 商品ページのコンテナ
-│   │   └── templates
-│   ├── config // 設定ファイル
-│   ├── images // 画像を格納する
-│   ├── index.css
-│   ├── index.js
-│   ├── reducers // ReduxのReducer
-│   │   └── index.js // Reducerを1つにまとめる
-│   ├── serviceWorker.js
-│   └── styles // 各コンテナのスタイル
-│       ├── itemListPage.js
-│       └── loginPage.js
-└── yarn.lock
-```
-
