@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##  [フロントエンド課題「Reactを使ったSPAの作成」]
 
-## Available Scripts
+### 使用した技術
+```
+＊ Node.js 12.1(LTS)
+* npm 6.4
+＊ React 16.1
+* Redux 4.0
+* React-dom 16.1
+* react-redux 7.1
+* react-router 5.1
+* redux-logger 3.0
+* redux-devtools-extension 2.1
+* react-router-dom 5.1
+* connected-react-router 6.6
+* history 4.1
+```
 
-In the project directory, you can run:
+### 環境構築
+#### ・nodebrewのインストール
+```
+# nodebrewのインストール
+# $ brew install nodebrew
 
-### `yarn start`
+# パスを通す
+export PATH=$HOME/.nodebrew/current/bin:$PATH　>> ~/.bash_profile
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 使用可能なバージョンを表示
+$ nodebrew ls-remote
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#最新のLTS版インストール
+$ nodebrew install-binary stable
 
-### `yarn test`
+# 使用バージョンを指定
+$ nodebrew use {version}
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### ・yarnのインストール
+```
+# npm 経由でyarnをインストール
+$ npm install -g yarn
+```
 
-### `yarn build`
+#### ・node_modulesのインストール
+```
+$ yarn install
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### ・サーバー側のアプリケーションを起動する
+```
+# DB(MySql)を起動する
+$ mysql.server start
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# GitHubでのOAuth認証でログインを行う必要があるため、サーバー側のアプリケーションを起動してください。
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### ・アプリケーションの起動
+```
+# アプリケーションをBitbucketからクローンする
+$git clone git@bitbucket.org:teamlabengineering/kawasaki-react-spa.git
 
-### `yarn eject`
+# ディレクトリを移動
+$ cd kawasaki-react-spa
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# アプリケーションをスタート
+$ yarn start
+```
