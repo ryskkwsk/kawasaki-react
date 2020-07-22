@@ -57,10 +57,10 @@ $ mysql.server start
 #### ・アプリケーションの起動
 ```
 # アプリケーションをBitbucketからクローンする
-$git clone git@bitbucket.org:teamlabengineering/kawasaki-react-spa.git
+$git clone git@github.com:teamlab-engineering/kawasaki-react.git
 
 # ディレクトリを移動
-$ cd kawasaki-react-spa
+$ cd kawasaki-react
 
 # アプリケーションをスタート
 $ yarn start
