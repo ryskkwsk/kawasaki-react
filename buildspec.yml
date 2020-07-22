@@ -1,5 +1,9 @@
 version: 0.2
 
+# CodeBuild
+
+# BitBucketからS3にソースをアップロード
+
 phases:
   install:
     runtime-versions:
@@ -7,11 +11,12 @@ phases:
 
   pre_build:
     commands:
-      - npm install
+      - npm install yarn
+      - yarn install
 
   build:
     commands:
-      - npm run build
+      - yarn start
 
 artifacts:
   files: [ '**/*' ]
