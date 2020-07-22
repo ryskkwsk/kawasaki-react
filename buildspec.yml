@@ -13,6 +13,7 @@ phases:
     commands:
       - npm install yarn
       - yarn install
+      - yarn upgrade
 
   build:
     commands:
