@@ -57,7 +57,7 @@ class LoginPage extends Component {
                   onClick={this.gitHubLogin}
                   children={
                     <div>
-                      <FontAwesomeIcon className={classes.github} icon={faGithub} />ログインログインログイン
+                      <FontAwesomeIcon className={classes.github} icon={faGithub} />ログイン
                     </div>
                   }
                 />
